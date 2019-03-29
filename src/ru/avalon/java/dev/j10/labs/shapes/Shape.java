@@ -12,7 +12,7 @@ package ru.avalon.java.dev.j10.labs.shapes;
  *
  * @see <a href="https://ru.wikipedia.org/wiki/%D0%A4%D0%B8%D0%B3%D1%83%D1%80%D0%B0_(%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F)">Фигура (геометрия)</a>
  */
-public interface Shape {
+public interface Shape extends Point, Comparable <Shape> {
 
     /*
      * TODO: Закончить определение интерфейса 'Shape'
@@ -48,12 +48,26 @@ public interface Shape {
      *
      * @return угол поворота фигуры.
      */
-    int getRotation();
-
+    default int getRotation()
+    {
+        return 0;
+    }
+ 
     /*
      * TODO: изменить определение метотода 'getRotation()'
      * Измените определение метода таким образом, чтобы
      * классам, не поддерживающим вращение, не требовалось
      * переопределять данный метод.
      */
+
+    @Override
+    default public int compareTo(Shape shapes)
+    {
+    if (this.getArea() > shapes.getArea()){
+    return 1;}
+    else if (this.getArea() == shapes.getArea()){
+    return 0;}
+    else {
+    return -1;}
+    }
 }
